@@ -28,7 +28,7 @@
   --good:#5fd0a0; --bad:#ff8a73; --bad-soft:#3b211c; --good-soft:#173a2e; --skip-soft:#22332f; --orange:#ff9a3d; --orange-ink:#1f1205; --grey:#33423e; --grey-ink:#e4f1ec; color-scheme:dark}
 *{box-sizing:border-box}
 /* Level G: same look, sky-blue palette */
-:root[data-level="G"]{--bg:#edf5fc; --surface:#ffffff; --ink:#1c3249; --muted:#5a7189; --line:#d0e1f1; --leaf:#2f7fc4; --leaf2:#6db4ea; --leaf-ink:#ffffff; --good:#2f7fc4; --good-soft:#e0eefa; --skip-soft:#e7eef5; --grey:#d2dde8; --grey-ink:#2f3f50;}
+:root[data-level="G"]{--bg:#e2f0fc; --surface:#f8fbff; --ink:#1c3249; --muted:#5a7189; --line:#d0e1f1; --leaf:#2f7fc4; --leaf2:#6db4ea; --leaf-ink:#ffffff; --good:#2f7fc4; --good-soft:#e0eefa; --skip-soft:#e7eef5; --grey:#d2dde8; --grey-ink:#2f3f50;}
 @media (prefers-color-scheme: dark){:root[data-level="G"]:not([data-theme="light"]){--bg:#0e1823; --surface:#162434; --ink:#e2edf8; --muted:#9ab0c5; --line:#283d53; --leaf:#5aaae8; --leaf2:#3d84c4; --leaf-ink:#0e1823; --good:#6cb8f0; --good-soft:#15304b; --skip-soft:#203142; --grey:#31404f; --grey-ink:#e2edf8; color-scheme:dark;}}
 :root[data-level="G"][data-theme="dark"]{--bg:#0e1823; --surface:#162434; --ink:#e2edf8; --muted:#9ab0c5; --line:#283d53; --leaf:#5aaae8; --leaf2:#3d84c4; --leaf-ink:#0e1823; --good:#6cb8f0; --good-soft:#15304b; --skip-soft:#203142; --grey:#31404f; --grey-ink:#e2edf8; color-scheme:dark;}
 .lv[data-l="G"] .L{color:#2f7fc4}
@@ -58,7 +58,6 @@ p{margin:0}
 .lv:disabled{cursor:default;opacity:.55}
 .lv:disabled .L{color:var(--muted)}
 .list{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
-@media (max-width:480px){.list{gap:6px} .book{padding:8px;gap:6px;border-radius:12px} .book .t{font-size:.8rem;line-height:1.2} .book .m{font-size:.7rem} .cover{width:30px;height:38px;font-size:.9rem;border-radius:4px 7px 7px 4px}}
 .list>.muted{grid-column:1/-1}
 .book{display:flex;flex-direction:column;align-items:flex-start;gap:8px;min-width:0;width:100%;text-align:left;background:var(--bg);border:2px solid var(--line);border-radius:16px;padding:12px;cursor:pointer;font:inherit;color:inherit}
 .book:hover{border-color:var(--leaf)}
@@ -111,6 +110,7 @@ pre{margin:0;font-size:.8rem;background:var(--bg);border:1.5px solid var(--line)
 footer{text-align:center;font-size:.85rem;color:var(--muted)}
 @media (max-width:420px){.panel{padding:18px} h1{font-size:1.6rem} .lv .L{font-size:2.1rem}}
 @media (prefers-reduced-motion:no-preference){.panel{animation:rise .25s ease-out}@keyframes rise{from{transform:translateY(6px)}to{transform:none}}}
+@media (max-width:480px){.list{gap:6px} .book{padding:7px;gap:5px;border-radius:12px} .book .t{font-size:.74rem;line-height:1.2;overflow-wrap:normal;word-break:normal;hyphens:auto} .book .m{font-size:.64rem} .cover{width:26px;height:34px;font-size:.8rem;border-radius:4px 7px 7px 4px}}
 </style>
 
 <div class="wrap">
