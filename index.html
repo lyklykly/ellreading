@@ -50,13 +50,13 @@ p{margin:0}
 .lv .n{font-size:.85rem;font-weight:700;color:var(--muted)}
 .lv:disabled{cursor:default;opacity:.55}
 .lv:disabled .L{color:var(--muted)}
-.list{display:flex;flex-direction:column;gap:10px}
-.book{display:flex;align-items:center;gap:14px;width:100%;text-align:left;background:var(--bg);border:2px solid var(--line);border-radius:16px;padding:12px 14px;cursor:pointer;font:inherit;color:inherit}
+.list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.list>.muted{grid-column:1/-1}
+.book{display:flex;flex-direction:column;align-items:flex-start;gap:8px;min-width:0;width:100%;text-align:left;background:var(--bg);border:2px solid var(--line);border-radius:16px;padding:12px;cursor:pointer;font:inherit;color:inherit}
 .book:hover{border-color:var(--leaf)}
 .cover{flex:none;width:44px;height:56px;border-radius:6px 10px 10px 6px;background:linear-gradient(135deg,var(--leaf),#5fb88f);display:grid;place-items:center;color:#fff;font-family:var(--display);font-weight:700;font-size:1.15rem;box-shadow:inset 5px 0 0 rgba(0,0,0,.12)}
-.book .t{font-family:var(--display);font-weight:600;font-size:1.1rem;line-height:1.25}
+.book .t{font-family:var(--display);font-weight:510;font-size:1.05rem;line-height:1.25;overflow-wrap:anywhere}
 .book .m{font-size:.85rem;color:var(--muted)}
-.book .go{margin-left:auto;font-weight:800;color:var(--leaf);white-space:nowrap}
 .search{font:inherit;width:100%;padding:12px 14px;border-radius:14px;border:2px solid var(--line);background:var(--bg);color:inherit}
 .progress{display:flex;gap:6px}
 .progress span{flex:1;height:8px;border-radius:99px;background:var(--line)}
@@ -101,7 +101,7 @@ p{margin:0}
 pre{margin:0;font-size:.8rem;background:var(--bg);border:1.5px solid var(--line);border-radius:12px;padding:12px;overflow-x:auto;white-space:pre}
 .big-check{width:72px;height:72px;border-radius:50%;background:var(--leaf);color:var(--leaf-ink);display:grid;place-items:center;font-size:2.4rem;font-weight:800}
 footer{text-align:center;font-size:.85rem;color:var(--muted)}
-@media (max-width:420px){.panel{padding:18px} h1{font-size:1.6rem} .lv .L{font-size:2.1rem}}
+@media (max-width:420px){.panel{padding:18px} h1{font-size:1.6rem} .lv .L{font-size:2.1rem} .list{gap:8px} .book{padding:10px} .book .t{font-size:.92rem} .cover{width:36px;height:46px;font-size:1rem}}
 @media (prefers-reduced-motion:no-preference){.panel{animation:rise .25s ease-out}@keyframes rise{from{transform:translateY(6px)}to{transform:none}}}
 </style>
 
@@ -153,14 +153,14 @@ function levels(){
 function books(L, filter=""){
   S={level:L}; setTag(L);
   const all=DATA[L].books, f=filter.trim().toLowerCase();
-  const shown=all.map((b,i)=>({b,i})).filter(x=>!f||x.b.title.toLowerCase().includes(f));
+  const shown=all.map((b,i)=>({b,i})).filter(x=>!f||x.b.title.toLowerCase().includes(f))
+    .sort((x,y)=>x.b.title.localeCompare(y.b.title,'en',{sensitivity:'base'}));
   app.innerHTML=`<div class="panel">
     <h1>Which book did you read?</h1>
     <input class="search" id="q" type="search" placeholder="Type the book title" value="${esc(filter)}" aria-label="Find a book">
     <div class="list">${shown.length?shown.map(({b,i})=>`<button class="book" data-i="${i}">
       <span class="cover">${esc(b.title[0])}</span>
-      <span><span class="t">${esc(b.title)}</span><br><span class="m">${b.questions.length} questions</span></span>
-      <span class="go">Start →</span></button>`).join(""):`<p class="muted">No book matches “${esc(filter)}”.</p>`}</div>
+      <span class="t">${esc(b.title)}</span><span class="m">${b.questions.length} questions</span></button>`).join(""):`<p class="muted">No book matches “${esc(filter)}”.</p>`}</div>
     <div class="row"><button class="btn ghost" id="back">← Levels</button></div>
   </div>`;
   const q=document.getElementById("q");
